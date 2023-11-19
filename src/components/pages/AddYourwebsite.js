@@ -3,15 +3,8 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import makeAnimated from "react-select/animated";
 import { useRouter } from "next/navigation";
 import ReCAPTCHA from "react-google-recaptcha";
-import {
-  Button,
-  Dialog,
-  DialogBody,
-  DialogFooter,
-  DialogHeader,
-} from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 
-const animatedComponents = makeAnimated();
 export default function AddYourwebsite() {
   const [captchaDone, setCaptchaDone] = useState(false);
   const [inputs, setInputs] = useState({
@@ -74,11 +67,7 @@ export default function AddYourwebsite() {
   useEffect(() => {
     import("preline");
   }, []);
-  // copy site key
-  // 6LcBqRQpAAAAAKej--52IjFcsvzv3mYaX3RMY3vJ
 
-  // copy secret key
-  // 6LcBqRQpAAAAABsU-iFkwiAbW5qhkARszzusQFXR
   function onChange(value) {
     setCaptchaDone(true);
     console.log("Captcha value:", value);
