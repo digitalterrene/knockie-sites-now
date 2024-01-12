@@ -4,20 +4,21 @@ import makeAnimated from "react-select/animated";
 import { useRouter } from "next/navigation";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@material-tailwind/react";
+import { knockie_sites_server } from "@/url/urls";
 
 export default function AddYourwebsite() {
   const [captchaDone, setCaptchaDone] = useState(false);
   const [inputs, setInputs] = useState({
-    siteName: "",
-    URL: "",
+    name: "",
+    url: "",
     description: "",
     safeBrowsing: false,
     captcha: false,
   });
 
   const [errors, setErrors] = useState({
-    siteName: "This field is required",
-    URL: "This field is required",
+    name: "This field is required",
+    url: "This field is required",
     tags: "This field is required",
     description: "This field is required",
     safeBrowsing: false,
@@ -29,8 +30,8 @@ export default function AddYourwebsite() {
   const validateForm = () => {
     // Your validation logic goes here
     const newErrors = {
-      siteName: inputs.siteName ? "" : "Site Name is required",
-      URL: inputs.URL ? "" : "URL is required",
+      name: inputs.name ? "" : "Site Name is required",
+      url: inputs.url ? "" : "url is required",
       description: inputs.description ? "" : "Description is required",
       safeBrowsing:
         inputs.safeBrowsing !== false
@@ -48,15 +49,32 @@ export default function AddYourwebsite() {
     return Object.values(newErrors).every((error) => error === "");
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(inputs);
 
     // Validate the form before submitting
     if (validateForm()) {
       // Submit the form or perform other actions
-      alert("Form submitted successfully");
-      router.push("/add-your-website/response");
-      console.log(inputs);
+      //save the inputs in the server
+
+      const res = await fetch(`${knockie_sites_server}/websites/upsert-new`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-cache",
+        mode: "cors",
+        body: JSON.stringify(inputs),
+      });
+      const json = await res.json();
+      if (res.ok) {
+        alert(`${json.message}`);
+        setTimeout(() => {
+          router.push("/add-your-website/response");
+        }, 2000);
+      } else {
+        alert(`${json.error}`);
+      }
     } else {
       // There are still errors, handle them accordingly
       alert("Something went wrong. Please try again");
@@ -87,40 +105,40 @@ export default function AddYourwebsite() {
               type="text"
               className="py-2 px-4 block w-[460px] border border-gray-300 rounded-md text-sm outline:border-blue-500 focus:outline-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               placeholder=" "
-              value={inputs?.siteName}
+              value={inputs?.name}
               onChange={(e) => {
                 setInputs((prevState) => ({
                   ...prevState,
-                  siteName: e.target.value,
+                  name: e.target.value,
                 }));
-                setErrors((prevState) => ({ ...prevState, siteName: "" }));
+                setErrors((prevState) => ({ ...prevState, name: "" }));
               }}
             ></input>
-            {errors?.siteName && (
-              <p className="text-xs text-red-500">{errors?.siteName}</p>
+            {errors?.name && (
+              <p className="text-xs text-red-500">{errors?.name}</p>
             )}
           </div>
         </div>
 
         <div className="flex   items-start justify-start">
-          <p className="font-bold  w-32 text-gray-500">URL</p>
+          <p className="font-bold  w-32 text-gray-500">url</p>
           <div className=" ">
             {" "}
             <input
               type="text"
               className="py-2 px-4 block w-[460px]  border border-gray-300 rounded-md text-sm focus:border-blue-500 focus:outline-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
               placeholder=" "
-              value={inputs?.URL}
+              value={inputs?.url}
               onChange={(e) => {
                 setInputs((prevState) => ({
                   ...prevState,
-                  URL: e.target.value,
+                  url: e.target.value,
                 }));
-                setErrors((prevState) => ({ ...prevState, URL: "" }));
+                setErrors((prevState) => ({ ...prevState, url: "" }));
               }}
             ></input>
-            {errors?.URL && (
-              <p className="text-xs text-red-500">{errors?.URL}</p>
+            {errors?.url && (
+              <p className="text-xs text-red-500">{errors?.url}</p>
             )}
           </div>
         </div>
