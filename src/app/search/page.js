@@ -1,9 +1,9 @@
 import React from "react";
-import RootPage from "../components/pages/RootPage";
+import SearchPage from "../../components/pages/SearchPage";
 export default function page() {
   return (
     <div>
-      <RootPage />
+      <SearchPage />
     </div>
   );
 }

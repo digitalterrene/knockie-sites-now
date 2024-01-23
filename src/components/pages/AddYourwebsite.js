@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import makeAnimated from "react-select/animated";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Button } from "@material-tailwind/react";
