@@ -60,7 +60,7 @@ export default function SearchPage() {
     }
   };
   return (
-    <div className="w-2/3 mx-auto p-8">
+    <div className="lg:w-2/3 md-w-full w-full   mx-auto p-8">
       <div className="flex items-center gap-10">
         <a href="/">
           <img className="w-28" src="icons/logo.png" alt="knockie sites logo" />
@@ -81,7 +81,7 @@ export default function SearchPage() {
       </div>
       {/* Tabs section starts here */}
       {!loading && (
-        <div className="ml-40 mt-10">
+        <div className="lg:ml-40 mt-10">
           <div className="border-b  border-gray-200 dark:border-gray-700">
             <nav className="flex space-x-2" aria-label="Tabs" role="tablist">
               <button

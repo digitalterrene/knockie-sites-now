@@ -165,7 +165,7 @@ export default function AddYourwebsite() {
           </div>
         </div>
       </div>
-      <div className=" ml-32">
+      <div className="  lg:ml-32">
         <div className="flex  ">
           <input
             type="checkbox"
