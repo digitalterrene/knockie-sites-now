@@ -153,7 +153,7 @@ export default function SearchPage() {
                             >
                               {url}
                             </a>
-                            <p className="py-3 text-gray-800 line-clamp-4 ">
+                            <p className="py-3 text-gray-800   ">
                               {description}
                             </p>
                             <div className="space-y-4">
@@ -166,7 +166,7 @@ export default function SearchPage() {
                                   >
                                     {title}
                                   </a>
-                                  <p className="line-clamp-2">{content}</p>
+                                  <p className=" ">{content}</p>
                                 </div>
                               ))}
                             </div>
