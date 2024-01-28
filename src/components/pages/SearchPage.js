@@ -60,7 +60,7 @@ export default function SearchPage() {
     }
   };
   return (
-    <div className="lg:w-2/3 md-w-full w-full   mx-auto p-8">
+    <div className="lg:w-2/3 md-w-full w-full   p-8">
       <div className="flex items-center gap-10">
         <a href="/">
           <img className="w-28" src="icons/logo.png" alt="knockie sites logo" />
