@@ -65,7 +65,7 @@ export default function SearchPage() {
         <a href="/">
           <img className="w-28" src="icons/logo.png" alt="knockie sites logo" />
         </a>
-        <label for="input-email-label" className="sr-only">
+        <label htmlFor="input-email-label" className="sr-only">
           Email
         </label>
         <input
@@ -129,31 +129,52 @@ export default function SearchPage() {
                     <p className="font-bold">Search Results</p>
                     <p>{websites?.length}</p>
                   </div>
-                  {websites?.map(({ name, url, description, _id }) => (
-                    <div key={_id} className="border rounded-xl p-4">
-                      <div className="flex gap-2 items-start">
-                        <img
-                          className="w-8 h-8"
-                          src="https://cdn-icons-png.flaticon.com/128/13970/13970024.png"
-                        />
-                        <div>
-                          <p>{name}</p>
-                          <a
-                            href={
-                              url?.includes("http")
-                                ? `${url}`
-                                : `https://${url}`
+                  {websites?.map(
+                    ({ name, favicon, sections, url, description, _id }) => (
+                      <div key={_id} className="border rounded-xl p-4">
+                        <div className="flex gap-2 items-start">
+                          <img
+                            className="w-8 h-8"
+                            src={
+                              favicon ||
+                              "https://cdn-icons-png.flaticon.com/128/13970/13970024.png"
                             }
-                            target="blank"
-                            className="text-gray-600"
-                          >
-                            {url}
-                          </a>
-                          <p className="py-3 text-gray-800">{description}</p>
+                          />
+                          <div>
+                            <p>{name}</p>
+                            <a
+                              href={
+                                url?.includes("http")
+                                  ? `${url}`
+                                  : `https://${url}`
+                              }
+                              target="blank"
+                              className="text-gray-600"
+                            >
+                              {url}
+                            </a>
+                            <p className="py-3 text-gray-800 line-clamp-4 ">
+                              {description}
+                            </p>
+                            <div className="space-y-4">
+                              {" "}
+                              {sections?.map(({ title, content }, i) => (
+                                <div key={i} className="text-gray-600 ">
+                                  <a
+                                    href={url}
+                                    className="font-semibold hover:text-blue-600 text-gray-900"
+                                  >
+                                    {title}
+                                  </a>
+                                  <p className="line-clamp-2">{content}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </div>
             </div>

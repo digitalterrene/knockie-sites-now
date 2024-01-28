@@ -12,6 +12,7 @@
     "@material-tailwind/react": "^2.1.4",
     "@preline/overlay": "^2.0.0",
     "@preline/select": "^2.0.0",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "next": "14.0.2",
     "preline": "^1.9.0",
     "react": "^18",
